@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B2 Unisex Salon | Mokola Hill, Ibadan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070707;--bg2:#0e0e0e;--gold:#d4af37;--gold2:#f3d06b;--gold3:#9a7418;--ink:#f6ecd6;--soft:#c2ad7a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Cormorant Garamond",Georgia,serif;font-size:19px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.nav button,.btn{font-family:Cinzel,"Times New Roman",serif}
+canvas#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(500px circle at var(--mx,50%) var(--my,30%),rgba(232,185,74,.16),transparent 60%),radial-gradient(60vmax 40vmax at 15% 110%,rgba(154,107,18,.25),transparent 70%);animation:breathe 7s ease-in-out infinite alternate}
+@keyframes breathe{to{opacity:.65}}
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:calc(8px + env(safe-area-inset-top,0px)) 16px 8px;background:linear-gradient(#000 60%,transparent)}
+header::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);z-index:10;background:#000}
+header img{height:46px;width:auto;cursor:pointer;position:relative;z-index:11}
+.nav{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.nav button{background:none;border:0;color:var(--soft);font-size:12px;letter-spacing:.14em;padding:8px 9px;cursor:pointer;position:relative}
+.nav button::after{content:"";position:absolute;left:50%;right:50%;bottom:2px;height:1px;background:var(--gold);transition:.35s}
+.nav button:hover,.nav button.on{color:var(--gold2)}
+.nav button:hover::after,.nav button.on::after{left:9px;right:9px}
+main{position:relative;z-index:1}
+.page{padding:calc(80px + env(safe-area-inset-top,0px)) 20px 50px;max-width:1000px;margin:0 auto}
+.hero{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;max-width:none}
+.hero .logo{width:min(70vw,380px);height:auto;filter:drop-shadow(0 0 30px rgba(232,185,74,.35));animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+h1{font-weight:700;letter-spacing:.18em;font-size:clamp(26px,7vw,56px);margin:26px 0 8px;line-height:1.15}
+h1 span{display:inline-block;opacity:0;transform:translateY(30px) scale(1.4);filter:blur(10px);background:linear-gradient(100deg,var(--gold3),var(--gold2) 45%,var(--gold) 60%,var(--gold3));background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:letter .9s cubic-bezier(.2,.8,.2,1) forwards,shine 5s linear infinite 2s}
+@keyframes letter{to{opacity:1;transform:none;filter:none}}
+@keyframes shine{to{background-position:-250% 0}}
+.tag{min-height:1.8em;font-style:italic;color:var(--soft);font-size:clamp(19px,3.4vw,25px);transition:opacity .8s}
+.btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:26px}
+.btn{position:relative;overflow:hidden;border:1px solid var(--gold);background:linear-gradient(120deg,var(--gold3),var(--gold),var(--gold2),var(--gold));background-size:200% 100%;color:#1a1100;font-weight:700;letter-spacing:.14em;font-size:13px;padding:14px 26px;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .25s,box-shadow .25s,background-position .6s}
+.btn:hover{background-position:100% 0;box-shadow:0 0 28px rgba(232,185,74,.55);transform:translateY(-2px)}
+.btn:active{transform:scale(.95)}
+.btn.ghost{background:transparent;color:var(--gold2)}
+.spark{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--gold2);box-shadow:0 0 10px var(--gold);pointer-events:none;z-index:60}
+h2{font-size:clamp(26px,5.5vw,44px);letter-spacing:.14em;margin:0 0 6px;color:var(--gold2);text-shadow:0 0 24px rgba(232,185,74,.4)}
+.line{height:1px;width:140px;background:linear-gradient(90deg,var(--gold),transparent);margin:10px 0 28px}
+.story p{max-width:62ch;opacity:0;transform:translateY(16px);filter:blur(6px);margin:0 0 20px}
+.page.on .story p{animation:letter 1.2s ease forwards}
+.page.on .story p:nth-child(2){animation-delay:.5s}.page.on .story p:nth-child(3){animation-delay:1s}.page.on .story p:nth-child(4){animation-delay:1.5s}
+.story em{color:var(--gold);font-size:1.15em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{position:relative;border:1px solid rgba(232,185,74,.35);background:linear-gradient(160deg,rgba(232,185,74,.1),rgba(0,0,0,.6));padding:26px 22px;cursor:pointer;overflow:hidden;transition:transform .4s,border-color .4s,box-shadow .4s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(220px circle at var(--x,50%) var(--y,0%),rgba(255,241,184,.22),transparent 70%);opacity:0;transition:.3s}
+.card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 10px 40px rgba(232,185,74,.2)}
+.card:hover::before{opacity:1}
+.card h3{margin:0 0 6px;letter-spacing:.12em;color:var(--gold2);font-size:19px}
+.card p{margin:0;color:var(--soft);font-size:17px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.tile{aspect-ratio:3/4;position:relative;border:1px solid rgba(232,185,74,.4);display:flex;align-items:flex-end;padding:12px;overflow:hidden;cursor:pointer;background:conic-gradient(from var(--a,0deg) at 50% 40%,#000,#3a2a08,#000,#6b4a0c,#000);animation:spin 9s linear infinite;transition:transform .4s,box-shadow .4s}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spin{to{--a:360deg}}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile span{position:relative;font-family:Cinzel,serif;font-size:12px;letter-spacing:.12em;color:var(--gold2);text-shadow:0 0 8px #000}
+.tile:hover{transform:scale(1.04);box-shadow:0 0 30px rgba(232,185,74,.4)}
+.note{color:var(--soft);font-size:16px;margin-top:18px;font-style:italic}
+form{display:grid;gap:14px;max-width:520px}
+label{font-family:Cinzel,serif;font-size:12px;letter-spacing:.14em;color:var(--soft);display:grid;gap:6px}
+input,select,textarea{background:rgba(0,0,0,.7);border:1px solid rgba(232,185,74,.45);color:var(--ink);padding:12px;font:inherit;font-size:18px;border-radius:0}
+input:focus,select:focus,textarea:focus,.btn:focus-visible,.nav button:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
+.err{color:#ff9a7a;min-height:1.4em;font-size:16px}
+.info p{margin:0 0 14px}.info a{color:var(--gold2)}
+.open{border:1px solid var(--gold);padding:14px 18px;display:inline-block;margin:8px 0 22px;box-shadow:0 0 24px rgba(232,185,74,.2)}
+.ads{display:grid;gap:16px}.ad{position:relative;border:1px solid var(--gold);padding:46px 26px;overflow:hidden;background:linear-gradient(120deg,var(--bg2),#2a1f06 60%,var(--bg2))}.ad::after{content:"";position:absolute;top:0;bottom:0;width:30%;left:-40%;background:linear-gradient(100deg,transparent,rgba(243,208,107,.25),transparent);animation:sweep 5s ease-in-out infinite}@keyframes sweep{to{left:120%}}.ad h3{margin:0 0 8px;font-size:clamp(22px,4.5vw,34px);letter-spacing:.1em;color:var(--gold2)}.ad p{margin:0 0 18px;color:var(--soft)}
+.adi{float:right;width:110px;height:146px;object-fit:cover;border:1px solid var(--gold);margin:0 0 10px 16px;box-shadow:0 0 24px rgba(212,175,55,.3)}.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}.vid{margin:0;border:1px solid rgba(212,175,55,.4);background:#000}.vid video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000}.vid span{display:block;padding:8px 10px;font-family:Cinzel,serif;font-size:12px;letter-spacing:.12em;color:var(--gold2)}
+#lb{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;background:rgba(7,7,7,.95);padding:20px}#lb.on{display:flex}#lbf{width:min(84vw,400px);aspect-ratio:3/4;border:1px solid var(--gold);position:relative;overflow:hidden;box-shadow:0 0 60px rgba(212,175,55,.3);background:conic-gradient(from 0deg at 50% 40%,#000,#3a2a08,#000,#6b4a0c,#000)}#lbf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}#lbt{margin:0;font-size:24px;letter-spacing:.14em;color:var(--gold2)}
+#swipe{position:fixed;inset:0;z-index:100;pointer-events:none;transform:translateX(-101%);background:linear-gradient(100deg,var(--gold3),var(--gold),var(--gold2) 50%,var(--gold),var(--gold3));box-shadow:0 0 80px 30px rgba(232,185,74,.6)}
+footer{position:relative;z-index:1;text-align:center;color:var(--soft);font-size:15px;padding:0 20px 30px}
+@media(max-width:600px){header img{height:38px}.nav button{font-size:10px;padding:8px 5px}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas><div class="glow"></div>
+<header>
+  <img data-logo alt="B2 Unisex Salon logo" data-go="home">
+  <nav class="nav" aria-label="Main"></nav>
+</header>
+<main>
+<section class="page hero on" id="home">
+  <img class="logo" data-logo alt="B2 Unisex Salon logo">
+  <h1 id="title" aria-label="B2 UNISEX SALON"></h1>
+  <div class="tag" id="tag"></div>
+  <div class="btns"><button class="btn" data-go="book">Book your visit</button><button class="btn ghost" data-go="gallery">See the gallery</button></div>
+</section>
+
+<section class="page" id="services">
+  <h2>Services</h2><div class="line"></div>
+  <div class="grid" id="svc"></div>
+</section>
+
+<section class="page" id="ads">
+  <h2>Advertisements</h2><div class="line"></div>
+  <div class="ads">
+    <div class="ad"><img class="adi" src="images/fade-1.jpg" alt="" loading="lazy"><h3>Sharp fades. Clean lines.</h3><p>Barbing done with precision, from classic tapers to bold designs.</p><button class="btn" data-go="book">Book a cut</button></div>
+    <div class="ad"><img class="adi" src="images/braids-1.jpg" alt="" loading="lazy"><h3>Braids, crowned.</h3><p>Hairdressing and styling made for your crown.</p><button class="btn" data-go="book">Book your hair</button></div>
+    <div class="ad"><h3>Wigs, flawless.</h3><p>Wig installs, styling and finishing that look like your own.</p><button class="btn" data-go="book">Book your wig</button></div>
+    <div class="ad"><img class="adi" src="images/poster-lashes.jpg" alt="" loading="lazy"><h3>Lashes, luminous.</h3><p>Soft, full lashes that frame your eyes.</p><button class="btn" data-go="book">Book your lashes</button></div>
+    <div class="ad"><img class="adi" src="images/nails-gold-chrome.jpg" alt="" loading="lazy"><h3>Nails, glowing.</h3><p>Manicures and pedicures finished to shine.</p><button class="btn" data-go="book">Book your nails</button></div>
+  </div>
+</section>
+
+<section class="page" id="gallery">
+  <h2>Gallery</h2><div class="line"></div>
+  <div class="gal" id="gal"></div>
+  <p class="note">Fresh looks from our chairs, added all the time.</p>
+</section>
+
+<section class="page" id="reels">
+  <h2>Watch our work</h2><div class="line"></div>
+  <div class="vids"><figure class="vid"><video controls muted playsinline preload="metadata" poster="images/poster-barbing.jpg" src="videos/barbing.mp4"></video><span>BARBING</span></figure><figure class="vid"><video controls muted playsinline preload="metadata" poster="images/poster-braids.jpg" src="videos/braids.mp4"></video><span>BRAIDS</span></figure><figure class="vid"><video controls muted playsinline preload="metadata" poster="images/poster-lashes.jpg" src="videos/lashes.mp4"></video><span>LASHES</span></figure><figure class="vid"><video controls muted playsinline preload="metadata" poster="images/poster-nails.jpg" src="videos/nails.mp4"></video><span>NAILS</span></figure></div>
+</section>
+
+<section class="page" id="book">
+  <h2>Book a visit</h2><div class="line"></div>
+  <form id="f" novalidate>
+    <label>YOUR NAME<input id="n" autocomplete="name"></label>
+    <label>PHONE OR WHATSAPP<input id="p" type="tel" autocomplete="tel"></label>
+    <label>SERVICE<select id="s"><option value="">Choose a service</option></select></label>
+    <label>PREFERRED DATE<input id="d" type="date"></label>
+    <label>PREFERRED TIME (9am to 8pm)<input id="t" type="time" min="09:00" max="20:00"></label>
+    <label>NOTES (optional)<textarea id="m" rows="3"></textarea></label>
+    <div class="err" id="err" role="alert"></div>
+    <div class="btns" style="justify-content:flex-start;margin:0">
+      <button class="btn" type="button" id="wa">Send on WhatsApp</button>
+      <button class="btn ghost" type="button" id="em">Send by email</button>
+    </div>
+  </form>
+</section>
+
+<section class="page info" id="contact">
+  <h2>Contact us</h2><div class="line"></div>
+  <div class="open">Open daily, 9:00 am to 8:00 pm</div>
+  <p><b>B2_unisexsalon</b><br>Obasa St, Mokola Hill, Ibadan 200285, Oyo, Nigeria</p>
+  <p>WhatsApp Business: <a href="https://wa.me/2349022492632">0902 249 2632</a></p>
+  <p>Email: <a href="mailto:Morenikejiraimat731@gmail.com">Morenikejiraimat731@gmail.com</a></p>
+  <p>Instagram: <a href="https://instagram.com/b2_unisexsalon" target="_blank" rel="noopener">@b2_unisexsalon</a></p>
+  <div class="btns" style="justify-content:flex-start"><a class="btn" href="https://wa.me/2349022492632" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
+</section>
+</main>
+<footer>B2 Unisex Salon · Mokola Hill, Ibadan</footer>
+<div id="lb" role="dialog" aria-modal="true" aria-label="Gallery preview"><h3 id="lbt"></h3><div id="lbf"></div><div class="btns" style="margin:0"><button class="btn ghost" data-nav="-1">Previous</button><button class="btn ghost" data-nav="1">Next</button><button class="btn" data-go="book">Book this look</button><button class="btn ghost" data-close>Close</button></div></div>
+<div id="swipe"></div>
+
+<script>
+const LOGO="images/logo.jpg";
+document.querySelectorAll("[data-logo]").forEach(i=>i.src=LOGO);
+const SV=[["Barbing","Clean cuts, sharp fades and crisp tapers."],["Hairdressing","Braids, styling and care for every texture."],["Manicures","Polished, shaped and finished by hand."],["Pedicures","Soft, smooth and beautifully done."],["Hair and Wigs","Wig installs, styling and finishing."],["Lashes","Soft, full lashes that frame your eyes."]];
+const GA=['Braids', 'Hairdressing', 'Fades', 'Tapers', 'Pastel and gold nails', 'Gold chrome nails', 'Nude nails', 'Zebra nails', 'Black and gold nails', 'French tips', 'Black French tips'];
+const PAGES=[["home","HOME"],["services","SERVICES"],["ads","ADS"],["gallery","GALLERY"],["reels","REELS"],["book","BOOK"],["contact","CONTACT"]];
+const $=s=>document.querySelector(s);
+$(".nav").innerHTML=PAGES.map(p=>`<button data-go="${p[0]}">${p[1]}</button>`).join("");
+$("#svc").innerHTML=SV.map(s=>`<div class="card" data-go="book" data-pick="${s[0]}"><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join("");
+const IMG={"Braids":"images/braids-1.jpg","Hairdressing":"images/salon-1.jpg","Fades":"images/fade-1.jpg","Tapers":"images/fade-2.jpg","Pastel and gold nails":"images/nails-pastel-gold.jpg","Gold chrome nails":"images/nails-gold-chrome.jpg","Nude nails":"images/nails-nude.jpg","Zebra nails":"images/nails-zebra.jpg","Black and gold nails":"images/nails-black-gold.jpg","French tips":"images/nails-french-charm.jpg","Black French tips":"images/nails-black-french.jpg"};
+$("#gal").innerHTML=GA.map((g,i)=>`<div class="tile" data-lb="${i}" tabindex="0" role="button" aria-label="Open ${g}">${IMG[g]?`<img src="${IMG[g]}" alt="${g}" onerror="this.remove()">`:""}<span>${g}</span></div>`).join("");
+$("#s").innerHTML+=SV.map(s=>`<option>${s[0]}</option>`).join("");
+// cinematic title
+const T="B2 UNISEX SALON";
+$("#title").innerHTML=[...T].map((c,i)=>`<span style="animation-delay:${.15+i*.09}s,${2+i*.1}s" aria-hidden="true">${c===" "?"&nbsp;":c}</span>`).join("");
+const L=["Where every look becomes gold.","Barbing. Braids. Nails. Lashes.","Beauty for everyone, in the heart of Ibadan."];let li=0;
+const tg=$("#tag");function nextTag(){tg.style.opacity=0;setTimeout(()=>{tg.textContent=L[li++%L.length];tg.style.opacity=1},800)}nextTag();setInterval(nextTag,4200);
+// page switch with gold swipe
+let cur="home",busy=false;
+function setAct(n){document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("on",b.dataset.go===n))}
+function show(n){document.getElementById(n).scrollIntoView();setAct(n);cur=n}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cur=e.target.id;setAct(cur)}}),{rootMargin:"-45% 0px -50% 0px"});document.querySelectorAll(".page").forEach(p=>io.observe(p));
+async function go(n,hash=true){if(busy||!document.getElementById(n))return;busy=true;const w=$("#swipe");
+ await w.animate([{transform:"translateX(-101%)"},{transform:"translateX(0)"}],{duration:520,easing:"cubic-bezier(.7,0,.3,1)",fill:"forwards"}).finished;
+ show(n);if(hash)try{history.replaceState(null,"","#"+n)}catch(e){}
+ await w.animate([{transform:"translateX(0)"},{transform:"translateX(101%)"}],{duration:560,easing:"cubic-bezier(.7,0,.3,1)",fill:"forwards"}).finished;busy=false}
+addEventListener("hashchange",()=>go(location.hash.slice(1),false));
+if(location.hash.length>1&&document.getElementById(location.hash.slice(1)))show(location.hash.slice(1));
+// click bursts + navigation
+document.addEventListener("click",e=>{
+ const el=e.target.closest(".btn,.card,.tile,[data-go]");if(!el)return;
+ for(let i=0;i<14;i++){const s=document.createElement("i");s.className="spark";s.style.left=e.clientX+"px";s.style.top=e.clientY+"px";document.body.appendChild(s);
+  const a=Math.random()*6.28,d=40+Math.random()*70;
+  s.animate([{transform:"translate(-50%,-50%) scale(1)",opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(0)`,opacity:0}],{duration:650,easing:"ease-out"}).onfinish=()=>s.remove()}
+ if(el.dataset.pick)$("#s").value=el.dataset.pick;
+ if(el.dataset.lb!==undefined)openLb(+el.dataset.lb);if(el.dataset.nav)openLb(lbi+ +el.dataset.nav);if(el.dataset.close!==undefined)closeLb();if(el.dataset.go){closeLb();go(el.dataset.go)}});
+let lbi=0;
+function openLb(i){const lb=$("#lb");lbi=(i+GA.length)%GA.length;const g=GA[lbi];$("#lbt").textContent=g;$("#lbf").innerHTML=IMG[g]?`<img src="${IMG[g]}" alt="${g}" onerror="this.remove()">`:"";lb.classList.add("on");lb.querySelector(".btn").focus()}
+function closeLb(){$("#lb").classList.remove("on")}
+addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.dataset&&e.target.dataset.lb!==undefined)openLb(+e.target.dataset.lb);if(!$("#lb").classList.contains("on"))return;if(e.key==="Escape")closeLb();if(e.key==="ArrowRight")openLb(lbi+1);if(e.key==="ArrowLeft")openLb(lbi-1)});
+document.addEventListener("pointermove",e=>{document.documentElement.style.setProperty("--mx",e.clientX+"px");document.documentElement.style.setProperty("--my",e.clientY+"px");
+ const c=e.target.closest&&e.target.closest(".card");if(c){const r=c.getBoundingClientRect();c.style.setProperty("--x",e.clientX-r.left+"px");c.style.setProperty("--y",e.clientY-r.top+"px")}});
+// booking
+function msg(){const n=$("#n").value.trim(),s=$("#s").value;if(!n||!s){$("#err").textContent="Add your name and choose a service to continue.";return null}$("#err").textContent="";
+ return `Hello B2 Unisex Salon, I would like to book.\nName: ${n}\nPhone: ${$("#p").value.trim()||"Not given"}\nService: ${s}\nDate: ${$("#d").value||"Flexible"}\nTime: ${$("#t").value||"Flexible"}\nNotes: ${$("#m").value.trim()||"None"}`}
+$("#wa").onclick=()=>{const m=msg();if(m)window.open("https://wa.me/2349022492632?text="+encodeURIComponent(m),"_blank")};
+$("#em").onclick=()=>{const m=msg();if(m)location.href="mailto:Morenikejiraimat731@gmail.com?subject="+encodeURIComponent("Booking request: "+$("#s").value)+"&body="+encodeURIComponent(m)};
+// live background: drifting gold light
+const cv=$("#bg"),x=cv.getContext("2d");let W,H,P=[];
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;P=Array.from({length:Math.min(70,W/14|0)},()=>({x:Math.random()*W,y:Math.random()*H,r:1+Math.random()*3.5,v:.15+Math.random()*.5,p:Math.random()*6.28,s:.5+Math.random()}))}
+rs();addEventListener("resize",rs);
+function draw(t){x.clearRect(0,0,W,H);
+ for(let k=0;k<3;k++){const bx=W*(.2+.3*k)+Math.sin(t/4000+k*2)*W*.12,g=x.createLinearGradient(bx,0,bx+W*.25,H);g.addColorStop(0,"rgba(255,230,150,0)");g.addColorStop(.5,"rgba(232,185,74,.05)");g.addColorStop(1,"rgba(255,230,150,0)");x.fillStyle=g;x.beginPath();x.moveTo(bx,0);x.lineTo(bx+W*.12,0);x.lineTo(bx+W*.4,H);x.lineTo(bx+W*.2,H);x.fill()}
+ for(const q of P){q.y-=q.v;q.x+=Math.sin(t/1500+q.p)*.3;if(q.y<-10){q.y=H+10;q.x=Math.random()*W}
+  const a=.25+.55*Math.abs(Math.sin(t/1200*q.s+q.p)),g=x.createRadialGradient(q.x,q.y,0,q.x,q.y,q.r*6);g.addColorStop(0,`rgba(255,235,160,${a})`);g.addColorStop(1,"rgba(232,185,74,0)");x.fillStyle=g;x.beginPath();x.arc(q.x,q.y,q.r*6,0,6.28);x.fill()}
+ matchMedia("(prefers-reduced-motion: reduce)").matches||requestAnimationFrame(draw)}
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>
